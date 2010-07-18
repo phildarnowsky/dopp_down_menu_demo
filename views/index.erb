@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>Dopp Down Menu Demo</title>
+
+    <style type="text/css">
+      .highlighted {
+        border: solid red 2px;
+      };
+    </style>
+
+    <script src="/javascript/jquery.js"></script>
+    <script src="/javascript/dopp_down_menu.js"></script>
+  </head>
+
+  <body>
+    
+    <table>
+      <tr>
+        <td style="vertical-align: top">
+          <form action="#">
+            <span id="chosen"></span>
+            <input type="text" id="direct_entry_field" size="50">
+            <div id="suggestions" style="display:none;"></div>
+          </form>
+        </td>
+
+        <td style="vertical-align: top">
+          <h2>Popular Choices</h2>
+          <div id="popular_choices"></div>
+        </td>
+      </tr>
+    </table>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        dopp_down_menu(
+          '#direct_entry_field',
+          '#suggestions',
+          '/search',
+          {
+            search_query_param: 'name',
+            suggestion_link_class: 'suggestion_link',
+            highlighted_link_class: 'highlighted',
+            suggestion_link_post_insert_hook: function(_, div) {div.append('<br/>')},
+            popular_choice_url: '/popular_animals',
+            popular_choice_div_selector: '#popular_choices',
+            show_popularity_in_popular_choices: true
+          }
+        );
+      });
+    </script>
+  </body>
+</html>
